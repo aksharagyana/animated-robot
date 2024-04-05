@@ -13,6 +13,10 @@ parameters:
     type: string
   - name: tfStateName
     type: string
+  - name: env
+    type: string
+  - name: app
+    type: string
 
 steps:
   - checkout: self
@@ -33,3 +37,9 @@ steps:
       backendAzureRmKey: "${{ parameters.tfStateName }}"
       workingDirectory: "${{ parameters.tfModulePath }}"
 
+  - task: TerraformTaskV4@4
+    inputs:
+      provider: 'azurerm'
+      command: 'workspace'
+      commandOptions: "new ${{ parameters.env }}-${{ parameters.app }}"
+      environmentServiceNameAzureRM: 'ServiceConnectionName'
