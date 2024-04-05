@@ -23,7 +23,7 @@ parameters:
 jobs:
   - job: Validate
     pool:
-      name: ubuntu-latest
+      name: ubuntu-docker
     steps:
       - template: ../steps/tf-init.yml
         parameters:
