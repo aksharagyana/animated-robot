@@ -1,0 +1,35 @@
+parameters:
+  - name: tfModulePath
+    type: string
+  - name: tfVersion
+    type: string
+  - name: azServiceConnection
+    type: string
+  - name: tfStateAzSaRG
+    type: string
+  - name: tfStateAzSa
+    type: string
+  - name: tfStateAzSaCont
+    type: string
+  - name: tfStateName
+    type: string
+
+steps:
+  - checkout: self
+
+  - task: TerraformInstaller@1
+    inputs:
+      terraformVersion: "${{ parameters.tfVersion }}"
+
+  - task: TerraformTaskV4@4
+    displayName: Initialize Terraform
+    inputs:
+      provider: 'azurerm'
+      command: 'init'
+      backendServiceArm: "${{ parameters.azServiceConnection }}"
+      backendAzureRmResourceGroupName: "${{ parameters.tfStateAzSaRG }}"
+      backendAzureRmStorageAccountName: "${{ parameters.tfStateAzSa }}"
+      backendAzureRmContainerName: "${{ parameters.tfStateAzSaCont }}"
+      backendAzureRmKey: "${{ parameters.tfStateName }}"
+      workingDirectory: "${{ parameters.tfModulePath }}"
+

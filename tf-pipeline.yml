@@ -1,0 +1,40 @@
+parameters:
+  - name: tfvars
+    type: string
+  - name: tfModulePath
+    type: string
+    default: "/s"
+  - name: tfVersion
+    type: string
+    default: "1.7.5"
+  - name: azServiceConnection
+    type: string
+  - name: tfStateAzSaRG
+    type: string
+  - name: tfStateAzSa
+    type: string
+  - name: tfStateAzSaCont
+    type: string
+  - name: tfStateName
+    type: string
+    default: "terraform.tfstate"
+  - name: env
+    type: string
+  - name: app
+    type: string
+
+stages:
+  - stage: Validate
+    displayName: Format and Validate
+    jobs:
+      - template: jobs/validate.yml
+        parameters:
+          tfModulePath: "${{ parameters.tfModulePath }}"
+          tfVersion: "${{ parameters.tfVersion }}"
+          azServiceConnection: "${{ parameters.azServiceConnection }}"
+          tfStateAzSaRG: "${{ parameters.tfStateAzSaRG }}"
+          tfStateAzSa: "${{ parameters.tfStateAzSa }}"
+          tfStateAzSaCont: "${{ parameters.tfStateAzSaCont }}"
+          tfStateName: "${{ parameters.tfStateName }}"
+          env: "${{ parameters.env }}"
+          app: "${{ parameters.app }}"
