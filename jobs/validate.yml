@@ -39,4 +39,4 @@ jobs:
         inputs:
           provider: 'azurerm'
           command: 'validate'
-          environmentServiceNameAzureRM: 'ServiceConnectionName'
+          environmentServiceNameAzureRM: "${{ parameters.azServiceConnection }}"
