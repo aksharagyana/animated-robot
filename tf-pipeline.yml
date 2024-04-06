@@ -3,7 +3,7 @@ parameters:
     type: string
   - name: tfModulePath
     type: string
-    default: "/s"
+    default: "s"
   - name: tfVersion
     type: string
     default: "1.7.5"
