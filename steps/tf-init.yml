@@ -42,4 +42,4 @@ steps:
       provider: 'azurerm'
       command: 'workspace'
       commandOptions: "new ${{ parameters.env }}-${{ parameters.app }}"
-      environmentServiceNameAzureRM: 'ServiceConnectionName'
+      backendServiceArm: "${{ parameters.azServiceConnection }}"
