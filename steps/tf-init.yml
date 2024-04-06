@@ -40,7 +40,7 @@ steps:
       backendAzureRmStorageAccountName: "${{ parameters.tfStateAzSa }}"
       backendAzureRmContainerName: "${{ parameters.tfStateAzSaCont }}"
       backendAzureRmKey: "${{ parameters.tfStateName }}"
-      workingDirectory: "${{ parameters.tfModulePath }}"
+#      workingDirectory: "${{ parameters.tfModulePath }}"
 
   - task: TerraformTaskV4@4
     inputs:
