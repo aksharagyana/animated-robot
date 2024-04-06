@@ -36,6 +36,7 @@ jobs:
           app: "${{ parameters.app }}"
 
       - task: TerraformTaskV4@4
+        displayName: Check whether the terraform configuration is valid
         inputs:
           provider: 'azurerm'
           command: 'validate'

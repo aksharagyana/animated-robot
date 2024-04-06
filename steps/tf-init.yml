@@ -31,7 +31,7 @@ steps:
       script: ls -ltr && pwd
 
   - task: TerraformTaskV4@4
-    displayName: Initialize Terraform
+    displayName: Initialize Terraform working directory
     inputs:
       provider: 'azurerm'
       command: 'init'
@@ -43,6 +43,7 @@ steps:
 #      workingDirectory: "${{ parameters.tfModulePath }}"
 
   - task: TerraformTaskV4@4
+    displayName: Manage terraform workspace
     inputs:
       provider: 'azurerm'
       command: 'workspace'
