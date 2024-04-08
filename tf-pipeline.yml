@@ -24,20 +24,13 @@ parameters:
     type: string
 
 stages:
-  - stage: Validate
-    displayName: Format and Validate
-    jobs:
-      - template: jobs/validate.yml
-        parameters:
-          azServiceConnection: "${{ parameters.azServiceConnection }}"
-          tfVersion: "${{ parameters.tfVersion }}"
-
   - stage: init
     displayName: Initialize Terraform
     jobs:
       - template: jobs/init.yml
         parameters:
           tfModulePath: "${{ parameters.tfModulePath }}"
+          tfVersion: "${{ parameters.tfVersion }}"
           azServiceConnection: "${{ parameters.azServiceConnection }}"
           tfStateAzSaRG: "${{ parameters.tfStateAzSaRG }}"
           tfStateAzSa: "${{ parameters.tfStateAzSa }}"
@@ -45,3 +38,10 @@ stages:
           tfStateName: "${{ parameters.tfStateName }}"
           env: "${{ parameters.env }}"
           app: "${{ parameters.app }}"
+
+  - stage: Validate
+    displayName: Format and Validate
+    jobs:
+      - template: jobs/validate.yml
+        parameters:
+          azServiceConnection: "${{ parameters.azServiceConnection }}"

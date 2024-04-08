@@ -1,6 +1,8 @@
 parameters:
   - name: tfModulePath
     type: string
+  - name: tfVersion
+    type: string
   - name: azServiceConnection
     type: string
   - name: tfStateAzSaRG
@@ -17,7 +19,12 @@ parameters:
     type: string
 
 steps:
+  - checkout: self
 
+  - task: TerraformInstaller@1
+    displayName: Install Terraform
+    inputs:
+      terraformVersion: "${{ parameters.tfVersion }}"
 
 #  - task: Bash@3
 #    inputs:

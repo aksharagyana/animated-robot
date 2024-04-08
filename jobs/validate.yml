@@ -1,8 +1,6 @@
 parameters:
   - name: azServiceConnection
     type: string
-  - name: tfVersion
-    type: string
 
 jobs:
   - job: Validate
@@ -13,4 +11,3 @@ jobs:
       - template: ../steps/tf-validate.yml
         parameters:
           azServiceConnection: "${{ parameters.azServiceConnection }}"
-          tfVersion: "${{ parameters.tfVersion }}"

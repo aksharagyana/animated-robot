@@ -1,6 +1,8 @@
 parameters:
   - name: tfModulePath
     type: string
+  - name: tfVersion
+    type: string
   - name: azServiceConnection
     type: string
   - name: tfStateAzSaRG
@@ -25,6 +27,7 @@ jobs:
       - template: ../steps/tf-init.yml
         parameters:
           tfModulePath: "${{ parameters.tfModulePath }}"
+          tfVersion: "${{ parameters.tfVersion }}"
           azServiceConnection: "${{ parameters.azServiceConnection }}"
           tfStateAzSaRG: "${{ parameters.tfStateAzSaRG }}"
           tfStateAzSa: "${{ parameters.tfStateAzSa }}"
