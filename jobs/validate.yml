@@ -20,6 +20,7 @@ parameters:
 
 jobs:
   - job: Validate
+    displayName: Format and Validate
     pool:
       name: ubuntu-docker
     steps:
