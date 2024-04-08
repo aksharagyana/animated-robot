@@ -22,13 +22,14 @@ steps:
   - checkout: self
 
   - task: TerraformInstaller@1
+    displayName: Install Terraform
     inputs:
       terraformVersion: "${{ parameters.tfVersion }}"
 
-  - task: Bash@3
-    inputs:
-      targetType: 'inline'
-      script: ls -ltr && pwd
+#  - task: Bash@3
+#    inputs:
+#      targetType: 'inline'
+#      script: ls -ltr && pwd
 
   - task: TerraformTaskV4@4
     displayName: Initialize Terraform working directory
