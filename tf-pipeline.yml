@@ -30,6 +30,7 @@ stages:
       - template: jobs/validate.yml
         parameters:
           azServiceConnection: "${{ parameters.azServiceConnection }}"
+          tfVersion: "${{ parameters.tfVersion }}"
 
   - stage: init
     displayName: Initialize Terraform
@@ -37,7 +38,6 @@ stages:
       - template: jobs/init.yml
         parameters:
           tfModulePath: "${{ parameters.tfModulePath }}"
-          tfVersion: "${{ parameters.tfVersion }}"
           azServiceConnection: "${{ parameters.azServiceConnection }}"
           tfStateAzSaRG: "${{ parameters.tfStateAzSaRG }}"
           tfStateAzSa: "${{ parameters.tfStateAzSa }}"

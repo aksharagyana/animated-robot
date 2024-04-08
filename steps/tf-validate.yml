@@ -1,8 +1,17 @@
 parameters:
   - name: azServiceConnection
     type: string
+  - name: tfVersion
+    type: string
 
 steps:
+  - checkout: self
+
+  - task: TerraformInstaller@1
+    displayName: Install Terraform
+    inputs:
+      terraformVersion: "${{ parameters.tfVersion }}"
+
   - task: TerraformTaskV4@4
     displayName: Check whether the terraform code is valid
     inputs:
