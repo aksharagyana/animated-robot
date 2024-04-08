@@ -1,0 +1,49 @@
+parameters:
+  - name: tfvars
+    type: string
+  - name: tfModulePath
+    type: string
+  - name: tfVersion
+    type: string
+  - name: azServiceConnection
+    type: string
+  - name: tfStateAzSaRG
+    type: string
+  - name: tfStateAzSa
+    type: string
+  - name: tfStateAzSaCont
+    type: string
+  - name: tfStateName
+    type: string
+  - name: env
+    type: string
+  - name: app
+    type: string
+
+jobs:
+  - job: Plan
+    displayName: Plan changes required by the current terraform configuration
+    pool:
+      name: ubuntu-docker
+    steps:
+      - template: ../steps/tf-init.yml
+        parameters:
+          tfModulePath: "${{ parameters.tfModulePath }}"
+          tfVersion: "${{ parameters.tfVersion }}"
+          azServiceConnection: "${{ parameters.azServiceConnection }}"
+          tfStateAzSaRG: "${{ parameters.tfStateAzSaRG }}"
+          tfStateAzSa: "${{ parameters.tfStateAzSa }}"
+          tfStateAzSaCont: "${{ parameters.tfStateAzSaCont }}"
+          tfStateName: "${{ parameters.tfStateName }}"
+          env: "${{ parameters.env }}"
+          app: "${{ parameters.app }}"
+
+      - template: ../steps/tf-plan.yml
+        parameters:
+          azServiceConnection: "${{ parameters.azServiceConnection }}"
+          tfvars: "${{ parameters.tfvars }}"
+
+      - template: ../steps/tf-apply.yml
+        parameters:
+          azServiceConnection: "${{ parameters.azServiceConnection }}"
+          tfvars: "${{ parameters.tfvars }}"

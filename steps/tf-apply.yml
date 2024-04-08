@@ -7,9 +7,9 @@ parameters:
 
 steps:
   - task: TerraformTaskV4@4
-    displayName: Plan changes required by the current terraform configuration (tf plan)
+    displayName: Creates or update infrastructure (tf apply)
     inputs:
       provider: 'azurerm'
-      command: 'plan'
-      commandOptions: "-var-file=${{ parameters.tfvars }}"
+      command: 'apply'
+      commandOptions: "-var-file=${{ parameters.tfvars }} -auto-approve"
       environmentServiceNameAzureRM: "${{ parameters.azServiceConnection }}"
