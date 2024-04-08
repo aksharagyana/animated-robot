@@ -42,18 +42,19 @@ steps:
       backendAzureRmContainerName: "${{ parameters.tfStateAzSaCont }}"
       backendAzureRmKey: "{{ parameters.env }}-${{ parameters.app }}-${{ parameters.tfStateName }}"
       workingDirectory: "${{ parameters.tfModulePath }}"
+      reconfigureBackend: true
 
-  - task: Bash@3
-    displayName: Manage terraform workspace
-    inputs:
-      targetType: 'inline'
-      script: echo "${{ parameters.env }}-${{ parameters.app }}" && terraform workspace select "${{ parameters.env }}-${{ parameters.app }}" || terraform workspace new "${{ parameters.env }}-${{ parameters.app }}"
-
-
-#  - task: TerraformTaskV4@4
+#  - task: Bash@3
 #    displayName: Manage terraform workspace
 #    inputs:
-#      provider: 'azurerm'
-#      command: 'custom'
-#      commandOptions: "workspace new ${{ parameters.env }}-${{ parameters.app }}"
-#      environmentServiceNameAzureRM: "${{ parameters.azServiceConnection }}"
+#      targetType: 'inline'
+#      script: echo "${{ parameters.env }}-${{ parameters.app }}" && terraform workspace select "${{ parameters.env }}-${{ parameters.app }}" || terraform workspace new "${{ parameters.env }}-${{ parameters.app }}"
+#
+
+  - task: TerraformTaskV4@4
+    displayName: Manage terraform workspace
+    inputs:
+      provider: 'azurerm'
+      command: 'custom'
+      commandOptions: "workspace new ${{ parameters.env }}-${{ parameters.app }}"
+      environmentServiceNameAzureRM: "${{ parameters.azServiceConnection }}"
