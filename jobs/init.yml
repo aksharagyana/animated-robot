@@ -1,12 +1,8 @@
 parameters:
-  - name: tfvars
-    type: string
   - name: tfModulePath
     type: string
-    default: "."
   - name: tfVersion
     type: string
-    default: "1.7.5"
   - name: azServiceConnection
     type: string
   - name: tfStateAzSaRG
@@ -17,24 +13,18 @@ parameters:
     type: string
   - name: tfStateName
     type: string
-    default: "terraform.tfstate"
   - name: env
     type: string
   - name: app
     type: string
 
-stages:
-  - stage: Validate
+jobs:
+  - job: Validate
     displayName: Format and Validate
-    jobs:
-      - template: jobs/validate.yml
-        parameters:
-          azServiceConnection: "${{ parameters.azServiceConnection }}"
-
-  - stage: init
-    displayName: Install Terraform
-    jobs:
-      - template: jobs/init.yml
+    pool:
+      name: ubuntu-docker
+    steps:
+      - template: ../steps/tf-init.yml
         parameters:
           tfModulePath: "${{ parameters.tfModulePath }}"
           tfVersion: "${{ parameters.tfVersion }}"
