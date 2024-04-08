@@ -13,7 +13,7 @@ parameters:
     type: string
   - name: tfStateName
     type: string
-  - name: env
+  - name: tfenv
     type: string
   - name: app
     type: string
@@ -31,7 +31,7 @@ steps:
       targetType: 'inline'
       script: echo "${TF_WORKSPACE}"
     env:
-      TF_WORKSPACE: "{{ parameters.env }}${{ parameters.app }}"
+      TF_WORKSPACE: "{{ parameters.tfenv }}${{ parameters.app }}"
 
   - task: TerraformTaskV4@4
     displayName: Initialize Terraform in the working directory
@@ -42,11 +42,11 @@ steps:
       backendAzureRmResourceGroupName: "${{ parameters.tfStateAzSaRG }}"
       backendAzureRmStorageAccountName: "${{ parameters.tfStateAzSa }}"
       backendAzureRmContainerName: "${{ parameters.tfStateAzSaCont }}"
-      backendAzureRmKey: "{{ parameters.env }}-${{ parameters.app }}-${{ parameters.tfStateName }}"
+      backendAzureRmKey: "{{ parameters.tfenv }}-${{ parameters.app }}-${{ parameters.tfStateName }}"
       workingDirectory: "${{ parameters.tfModulePath }}"
       reconfigureBackend: true
     env:
-      TF_WORKSPACE: "{{ parameters.env }}${{ parameters.app }}"
+      TF_WORKSPACE: "{{ parameters.tfenv }}${{ parameters.app }}"
 #  - task: Bash@3
 #    displayName: Manage terraform workspace
 #    inputs:
