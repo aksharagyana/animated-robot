@@ -26,10 +26,12 @@ steps:
     inputs:
       terraformVersion: "${{ parameters.tfVersion }}"
 
-#  - task: Bash@3
-#    inputs:
-#      targetType: 'inline'
-#      script: ls -ltr && pwd
+  - task: Bash@3
+    inputs:
+      targetType: 'inline'
+      script: echo "${TF_WORKSPACE}"
+    env:
+      TF_WORKSPACE: "{{ parameters.env }}${{ parameters.app }}"
 
   - task: TerraformTaskV4@4
     displayName: Initialize Terraform in the working directory
