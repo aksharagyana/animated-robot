@@ -19,8 +19,8 @@ parameters:
     type: string
 
 jobs:
-  - job: Validate
-    displayName: Format and Validate
+  - job: init
+    displayName: Initialize Terraform
     pool:
       name: ubuntu-docker
     steps:
