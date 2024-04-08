@@ -55,26 +55,10 @@ stages:
 #          env: "${{ parameters.env }}"
 #          app: "${{ parameters.app }}"
 
-  - stage: Destroy
-    displayName: Destroy terraform changes
-    jobs:
-      - template: jobs/destroy.yml
-        parameters:
-          tfvars: "${{ parameters.tfvars }}"
-          tfModulePath: "${{ parameters.tfModulePath }}"
-          tfVersion: "${{ parameters.tfVersion }}"
-          azServiceConnection: "${{ parameters.azServiceConnection }}"
-          tfStateAzSaRG: "${{ parameters.tfStateAzSaRG }}"
-          tfStateAzSa: "${{ parameters.tfStateAzSa }}"
-          tfStateAzSaCont: "${{ parameters.tfStateAzSaCont }}"
-          tfStateName: "${{ parameters.tfStateName }}"
-          env: "${{ parameters.env }}"
-          app: "${{ parameters.app }}"
-
-#  - stage: Apply
-#    displayName: Apply terraform changes
+#  - stage: Destroy
+#    displayName: Destroy terraform changes
 #    jobs:
-#      - template: jobs/apply.yml
+#      - template: jobs/destroy.yml
 #        parameters:
 #          tfvars: "${{ parameters.tfvars }}"
 #          tfModulePath: "${{ parameters.tfModulePath }}"
@@ -86,3 +70,19 @@ stages:
 #          tfStateName: "${{ parameters.tfStateName }}"
 #          env: "${{ parameters.env }}"
 #          app: "${{ parameters.app }}"
+
+  - stage: Apply
+    displayName: Apply terraform changes
+    jobs:
+      - template: jobs/apply.yml
+        parameters:
+          tfvars: "${{ parameters.tfvars }}"
+          tfModulePath: "${{ parameters.tfModulePath }}"
+          tfVersion: "${{ parameters.tfVersion }}"
+          azServiceConnection: "${{ parameters.azServiceConnection }}"
+          tfStateAzSaRG: "${{ parameters.tfStateAzSaRG }}"
+          tfStateAzSa: "${{ parameters.tfStateAzSa }}"
+          tfStateAzSaCont: "${{ parameters.tfStateAzSaCont }}"
+          tfStateName: "${{ parameters.tfStateName }}"
+          env: "${{ parameters.env }}"
+          app: "${{ parameters.app }}"
