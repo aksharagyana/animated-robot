@@ -32,7 +32,7 @@ steps:
 #      script: ls -ltr && pwd
 
   - task: TerraformTaskV4@4
-    displayName: Initialize Terraform working directory
+    displayName: Initialize Terraform in the working directory
     inputs:
       provider: 'azurerm'
       command: 'init'
