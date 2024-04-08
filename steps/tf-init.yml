@@ -26,12 +26,12 @@ steps:
     inputs:
       terraformVersion: "${{ parameters.tfVersion }}"
 
-  - task: Bash@3
-    inputs:
-      targetType: 'inline'
-      script: echo "${TF_WORKSPACE}"
-    env:
-      TF_WORKSPACE: "${{ parameters.tfenv }}${{ parameters.app }}"
+#  - task: Bash@3
+#    inputs:
+#      targetType: 'inline'
+#      script: echo "${TF_WORKSPACE}"
+#    env:
+#      TF_WORKSPACE: "${{ parameters.tfenv }}${{ parameters.app }}"
 
   - task: TerraformTaskV4@4
     displayName: Initialize Terraform in the working directory
@@ -47,17 +47,3 @@ steps:
       reconfigureBackend: true
     env:
       TF_WORKSPACE: "${{ parameters.tfenv }}${{ parameters.app }}"
-#  - task: Bash@3
-#    displayName: Manage terraform workspace
-#    inputs:
-#      targetType: 'inline'
-#      script: echo "${{ parameters.env }}-${{ parameters.app }}" && terraform workspace select "${{ parameters.env }}-${{ parameters.app }}" || terraform workspace new "${{ parameters.env }}-${{ parameters.app }}"
-#
-
-#  - task: TerraformTaskV4@4
-#    displayName: Manage terraform workspace
-#    inputs:
-#      provider: 'azurerm'
-#      command: 'custom'
-#      commandOptions: "workspace new ${{ parameters.env }}-${{ parameters.app }}"
-#      environmentServiceNameAzureRM: "${{ parameters.azServiceConnection }}"
