@@ -58,7 +58,7 @@ stages:
   - stage: Destroy
     displayName: Destroy terraform changes
     jobs:
-      - template: jobs/tf-destroy.yml
+      - template: jobs/destroy.yml
         parameters:
           tfvars: "${{ parameters.tfvars }}"
           tfModulePath: "${{ parameters.tfModulePath }}"
