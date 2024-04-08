@@ -46,6 +46,6 @@ jobs:
         displayName: Check if the terraform code is formatted
         inputs:
           provider: 'azurerm'
-          command: 'fmt'
-          commandOptions: '-check  -recursive'
+          command: 'custom'
+          commandOptions: 'fmt -check  -recursive'
           environmentServiceNameAzureRM: "${{ parameters.azServiceConnection }}"
