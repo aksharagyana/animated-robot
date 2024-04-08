@@ -36,7 +36,7 @@ stages:
           tfStateAzSa: "${{ parameters.tfStateAzSa }}"
           tfStateAzSaCont: "${{ parameters.tfStateAzSaCont }}"
           tfStateName: "${{ parameters.tfStateName }}"
-          env: "dev"
+          tfenv: "dev"
           app: "${{ parameters.app }}"
 
   - stage: Plan
