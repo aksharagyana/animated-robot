@@ -3,10 +3,8 @@ parameters:
     type: string
   - name: tfModulePath
     type: string
-    default: "."
   - name: tfVersion
     type: string
-    default: "1.7.5"
   - name: azServiceConnection
     type: string
   - name: tfStateAzSaRG
@@ -17,17 +15,18 @@ parameters:
     type: string
   - name: tfStateName
     type: string
-    default: "terraform.tfstate"
   - name: env
     type: string
   - name: app
     type: string
 
-stages:
-  - stage: Validate
-    displayName: Format and Validate
-    jobs:
-      - template: jobs/validate.yml
+jobs:
+  - job: Plan
+    displayName: Plan changes required by the current terraform configuration
+    pool:
+      name: ubuntu-docker
+    steps:
+      - template: ../steps/tf-init.yml
         parameters:
           tfModulePath: "${{ parameters.tfModulePath }}"
           tfVersion: "${{ parameters.tfVersion }}"
@@ -39,17 +38,7 @@ stages:
           env: "${{ parameters.env }}"
           app: "${{ parameters.app }}"
 
-  - stage: Plan
-    displayName: Plan terraform changes
-    jobs:
-      - template: jobs/plan.yml
+      - template: ../steps/tf-plan.yml
         parameters:
-          tfModulePath: "${{ parameters.tfModulePath }}"
-          tfVersion: "${{ parameters.tfVersion }}"
           azServiceConnection: "${{ parameters.azServiceConnection }}"
-          tfStateAzSaRG: "${{ parameters.tfStateAzSaRG }}"
-          tfStateAzSa: "${{ parameters.tfStateAzSa }}"
-          tfStateAzSaCont: "${{ parameters.tfStateAzSaCont }}"
-          tfStateName: "${{ parameters.tfStateName }}"
-          env: "${{ parameters.env }}"
-          app: "${{ parameters.app }}"
+          tfvars: "${{ parameters.tfvars }}"

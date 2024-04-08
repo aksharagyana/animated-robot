@@ -1,0 +1,15 @@
+parameters:
+  - name: tfvars
+    type: string
+  - name: azServiceConnection
+    type: string
+
+
+steps:
+  - task: TerraformTaskV4@4
+    displayName: Plan changes required by the current terraform configuration
+    inputs:
+      provider: 'azurerm'
+      command: 'plan'
+      commandOptions: "-var-file=${{ parameters.tfvars }}"
+      environmentServiceNameAzureRM: "${{ parameters.azServiceConnection }}"
