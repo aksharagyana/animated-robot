@@ -1,37 +1,37 @@
-parameters:
-  - name: tfModulePath
-    type: string
-  - name: tfVersion
-    type: string
-  - name: azServiceConnection
-    type: string
-  - name: tfStateAzSaRG
-    type: string
-  - name: tfStateAzSa
-    type: string
-  - name: tfStateAzSaCont
-    type: string
-  - name: tfStateName
-    type: string
-  - name: env
-    type: string
-  - name: app
-    type: string
-
-jobs:
-  - job: init
-    displayName: Initialize Terraform
-    pool:
-      name: ubuntu-docker
-    steps:
-      - template: ../steps/tf-init.yml
-        parameters:
-          tfModulePath: "${{ parameters.tfModulePath }}"
-          tfVersion: "${{ parameters.tfVersion }}"
-          azServiceConnection: "${{ parameters.azServiceConnection }}"
-          tfStateAzSaRG: "${{ parameters.tfStateAzSaRG }}"
-          tfStateAzSa: "${{ parameters.tfStateAzSa }}"
-          tfStateAzSaCont: "${{ parameters.tfStateAzSaCont }}"
-          tfStateName: "${{ parameters.tfStateName }}"
-          env: "${{ parameters.env }}"
-          app: "${{ parameters.app }}"
+#parameters:
+#  - name: tfModulePath
+#    type: string
+#  - name: tfVersion
+#    type: string
+#  - name: azServiceConnection
+#    type: string
+#  - name: tfStateAzSaRG
+#    type: string
+#  - name: tfStateAzSa
+#    type: string
+#  - name: tfStateAzSaCont
+#    type: string
+#  - name: tfStateName
+#    type: string
+#  - name: env
+#    type: string
+#  - name: app
+#    type: string
+#
+#jobs:
+#  - job: init
+#    displayName: Initialize Terraform
+#    pool:
+#      name: ubuntu-docker
+#    steps:
+#      - template: ../steps/tf-init.yml
+#        parameters:
+#          tfModulePath: "${{ parameters.tfModulePath }}"
+#          tfVersion: "${{ parameters.tfVersion }}"
+#          azServiceConnection: "${{ parameters.azServiceConnection }}"
+#          tfStateAzSaRG: "${{ parameters.tfStateAzSaRG }}"
+#          tfStateAzSa: "${{ parameters.tfStateAzSa }}"
+#          tfStateAzSaCont: "${{ parameters.tfStateAzSaCont }}"
+#          tfStateName: "${{ parameters.tfStateName }}"
+#          env: "${{ parameters.env }}"
+#          app: "${{ parameters.app }}"

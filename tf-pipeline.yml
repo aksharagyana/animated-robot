@@ -24,20 +24,20 @@ parameters:
     type: string
 
 stages:
-  - stage: init
-    displayName: Initialize Terraform
-    jobs:
-      - template: jobs/init.yml
-        parameters:
-          tfModulePath: "${{ parameters.tfModulePath }}"
-          tfVersion: "${{ parameters.tfVersion }}"
-          azServiceConnection: "${{ parameters.azServiceConnection }}"
-          tfStateAzSaRG: "${{ parameters.tfStateAzSaRG }}"
-          tfStateAzSa: "${{ parameters.tfStateAzSa }}"
-          tfStateAzSaCont: "${{ parameters.tfStateAzSaCont }}"
-          tfStateName: "${{ parameters.tfStateName }}"
-          env: "${{ parameters.env }}"
-          app: "${{ parameters.app }}"
+#  - stage: init
+#    displayName: Initialize Terraform
+#    jobs:
+#      - template: jobs/init.yml
+#        parameters:
+#          tfModulePath: "${{ parameters.tfModulePath }}"
+#          tfVersion: "${{ parameters.tfVersion }}"
+#          azServiceConnection: "${{ parameters.azServiceConnection }}"
+#          tfStateAzSaRG: "${{ parameters.tfStateAzSaRG }}"
+#          tfStateAzSa: "${{ parameters.tfStateAzSa }}"
+#          tfStateAzSaCont: "${{ parameters.tfStateAzSaCont }}"
+#          tfStateName: "${{ parameters.tfStateName }}"
+#          env: "${{ parameters.env }}"
+#          app: "${{ parameters.app }}"
 
   - stage: Validate
     displayName: Format and Validate
