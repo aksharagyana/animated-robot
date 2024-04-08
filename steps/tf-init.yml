@@ -47,7 +47,7 @@ steps:
     displayName: Manage terraform workspace
     inputs:
       targetType: 'inline'
-      script: terraform workspace select "${{ parameters.env }}-${{ parameters.app }}" || terraform workspace new "${{ parameters.env }}-${{ parameters.app }}"
+      script: echo "${{ parameters.env }}-${{ parameters.app }}" && terraform workspace select "${{ parameters.env }}-${{ parameters.app }}" || terraform workspace new "${{ parameters.env }}-${{ parameters.app }}"
 
 
 #  - task: TerraformTaskV4@4
