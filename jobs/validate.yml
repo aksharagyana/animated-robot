@@ -13,7 +13,7 @@ parameters:
     type: string
   - name: tfStateName
     type: string
-  - name: env
+  - name: tfenv
     type: string
   - name: app
     type: string
@@ -29,7 +29,7 @@ jobs:
           targetType: 'inline'
           script: echo "1*** ${TF_WORKSPACE}"
         env:
-          TF_WORKSPACE: "{{ parameters.env }}${{ parameters.app }}"
+          TF_WORKSPACE: "${{ parameters.tfenv }}${{ parameters.app }}"
       - template: ../steps/tf-init.yml
         parameters:
           tfModulePath: "${{ parameters.tfModulePath }}"
@@ -39,7 +39,7 @@ jobs:
           tfStateAzSa: "${{ parameters.tfStateAzSa }}"
           tfStateAzSaCont: "${{ parameters.tfStateAzSaCont }}"
           tfStateName: "${{ parameters.tfStateName }}"
-          env: "${{ parameters.env }}"
+          env: "${{ parameters.tfenv }}"
           app: "${{ parameters.app }}"
 
       - template: ../steps/tf-validate.yml
