@@ -35,7 +35,7 @@ jobs:
           tfStateAzSa: "${{ parameters.tfStateAzSa }}"
           tfStateAzSaCont: "${{ parameters.tfStateAzSaCont }}"
           tfStateName: "${{ parameters.tfStateName }}"
-          env: "${{ parameters.env }}"
+          tfenv: "${{ parameters.env }}"
           app: "${{ parameters.app }}"
 
       - template: ../steps/tf-plan.yml
