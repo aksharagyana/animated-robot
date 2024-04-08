@@ -44,7 +44,7 @@ steps:
       workingDirectory: "${{ parameters.tfModulePath }}"
       reconfigureBackend: true
     env:
-      TF_WORKSPACE: "{{ parameters.env }}-${{ parameters.app }}"
+      TF_WORKSPACE: "{{ parameters.env }}${{ parameters.app }}"
 #  - task: Bash@3
 #    displayName: Manage terraform workspace
 #    inputs:
