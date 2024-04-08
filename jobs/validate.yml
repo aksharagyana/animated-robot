@@ -36,8 +36,16 @@ jobs:
           app: "${{ parameters.app }}"
 
       - task: TerraformTaskV4@4
-        displayName: Check whether the terraform configuration is valid
+        displayName: Check whether the terraform code is valid
         inputs:
           provider: 'azurerm'
           command: 'validate'
+          environmentServiceNameAzureRM: "${{ parameters.azServiceConnection }}"
+
+      - task: TerraformTaskV4@4
+        displayName: Check if the terraform code is formatted
+        inputs:
+          provider: 'azurerm'
+          command: 'fmt'
+          commandOptions: '-check  -recursive'
           environmentServiceNameAzureRM: "${{ parameters.azServiceConnection }}"
