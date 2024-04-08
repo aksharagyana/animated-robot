@@ -71,18 +71,18 @@ stages:
           env: "${{ parameters.env }}"
           app: "${{ parameters.app }}"
 
-  - stage: Apply
-    displayName: Apply terraform changes
-    jobs:
-      - template: jobs/apply.yml
-        parameters:
-          tfvars: "${{ parameters.tfvars }}"
-          tfModulePath: "${{ parameters.tfModulePath }}"
-          tfVersion: "${{ parameters.tfVersion }}"
-          azServiceConnection: "${{ parameters.azServiceConnection }}"
-          tfStateAzSaRG: "${{ parameters.tfStateAzSaRG }}"
-          tfStateAzSa: "${{ parameters.tfStateAzSa }}"
-          tfStateAzSaCont: "${{ parameters.tfStateAzSaCont }}"
-          tfStateName: "${{ parameters.tfStateName }}"
-          env: "${{ parameters.env }}"
-          app: "${{ parameters.app }}"
+#  - stage: Apply
+#    displayName: Apply terraform changes
+#    jobs:
+#      - template: jobs/apply.yml
+#        parameters:
+#          tfvars: "${{ parameters.tfvars }}"
+#          tfModulePath: "${{ parameters.tfModulePath }}"
+#          tfVersion: "${{ parameters.tfVersion }}"
+#          azServiceConnection: "${{ parameters.azServiceConnection }}"
+#          tfStateAzSaRG: "${{ parameters.tfStateAzSaRG }}"
+#          tfStateAzSa: "${{ parameters.tfStateAzSa }}"
+#          tfStateAzSaCont: "${{ parameters.tfStateAzSaCont }}"
+#          tfStateName: "${{ parameters.tfStateName }}"
+#          env: "${{ parameters.env }}"
+#          app: "${{ parameters.app }}"
