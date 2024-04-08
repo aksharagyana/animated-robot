@@ -39,7 +39,7 @@ jobs:
           tfStateAzSa: "${{ parameters.tfStateAzSa }}"
           tfStateAzSaCont: "${{ parameters.tfStateAzSaCont }}"
           tfStateName: "${{ parameters.tfStateName }}"
-          env: "${{ parameters.tfenv }}"
+          tfenv: "${{ parameters.tfenv }}"
           app: "${{ parameters.app }}"
 
       - template: ../steps/tf-validate.yml
