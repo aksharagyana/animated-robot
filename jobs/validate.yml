@@ -24,6 +24,12 @@ jobs:
     pool:
       name: ubuntu-docker
     steps:
+      - task: Bash@3
+        inputs:
+          targetType: 'inline'
+          script: echo "1*** ${TF_WORKSPACE}"
+        env:
+          TF_WORKSPACE: "{{ parameters.env }}${{ parameters.app }}"
       - template: ../steps/tf-init.yml
         parameters:
           tfModulePath: "${{ parameters.tfModulePath }}"
