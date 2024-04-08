@@ -44,6 +44,7 @@ stages:
     jobs:
       - template: jobs/plan.yml
         parameters:
+          tfvars: "${{ parameters.tfvars }}"
           tfModulePath: "${{ parameters.tfModulePath }}"
           tfVersion: "${{ parameters.tfVersion }}"
           azServiceConnection: "${{ parameters.azServiceConnection }}"
