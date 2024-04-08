@@ -24,36 +24,36 @@ parameters:
     type: string
 
 stages:
-  - stage: Validate
-    displayName: Format and Validate
-    jobs:
-      - template: jobs/init.yml
-        parameters:
-          tfModulePath: "${{ parameters.tfModulePath }}"
-          tfVersion: "${{ parameters.tfVersion }}"
-          azServiceConnection: "${{ parameters.azServiceConnection }}"
-          tfStateAzSaRG: "${{ parameters.tfStateAzSaRG }}"
-          tfStateAzSa: "${{ parameters.tfStateAzSa }}"
-          tfStateAzSaCont: "${{ parameters.tfStateAzSaCont }}"
-          tfStateName: "${{ parameters.tfStateName }}"
-          tfenv: "dev"
-          app: "${{ parameters.app }}"
-
-  - stage: Plan
-    displayName: Plan terraform changes
-    jobs:
-      - template: jobs/plan.yml
-        parameters:
-          tfvars: "${{ parameters.tfvars }}"
-          tfModulePath: "${{ parameters.tfModulePath }}"
-          tfVersion: "${{ parameters.tfVersion }}"
-          azServiceConnection: "${{ parameters.azServiceConnection }}"
-          tfStateAzSaRG: "${{ parameters.tfStateAzSaRG }}"
-          tfStateAzSa: "${{ parameters.tfStateAzSa }}"
-          tfStateAzSaCont: "${{ parameters.tfStateAzSaCont }}"
-          tfStateName: "${{ parameters.tfStateName }}"
-          env: "${{ parameters.env }}"
-          app: "${{ parameters.app }}"
+#  - stage: Validate
+#    displayName: Format and Validate
+#    jobs:
+#      - template: jobs/init.yml
+#        parameters:
+#          tfModulePath: "${{ parameters.tfModulePath }}"
+#          tfVersion: "${{ parameters.tfVersion }}"
+#          azServiceConnection: "${{ parameters.azServiceConnection }}"
+#          tfStateAzSaRG: "${{ parameters.tfStateAzSaRG }}"
+#          tfStateAzSa: "${{ parameters.tfStateAzSa }}"
+#          tfStateAzSaCont: "${{ parameters.tfStateAzSaCont }}"
+#          tfStateName: "${{ parameters.tfStateName }}"
+#          tfenv: "dev"
+#          app: "${{ parameters.app }}"
+#
+#  - stage: Plan
+#    displayName: Plan terraform changes
+#    jobs:
+#      - template: jobs/plan.yml
+#        parameters:
+#          tfvars: "${{ parameters.tfvars }}"
+#          tfModulePath: "${{ parameters.tfModulePath }}"
+#          tfVersion: "${{ parameters.tfVersion }}"
+#          azServiceConnection: "${{ parameters.azServiceConnection }}"
+#          tfStateAzSaRG: "${{ parameters.tfStateAzSaRG }}"
+#          tfStateAzSa: "${{ parameters.tfStateAzSa }}"
+#          tfStateAzSaCont: "${{ parameters.tfStateAzSaCont }}"
+#          tfStateName: "${{ parameters.tfStateName }}"
+#          env: "${{ parameters.env }}"
+#          app: "${{ parameters.app }}"
 
   - stage: Destroy
     displayName: Destroy terraform changes
