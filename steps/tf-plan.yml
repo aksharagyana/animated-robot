@@ -5,6 +5,7 @@ parameters:
     type: string
   - name: tfaction
     type: string
+    default: ''
 
 steps:
   - task: TerraformTaskV4@4
