@@ -51,10 +51,9 @@ jobs:
           ${{ if eq(variables['Build.SourceBranchName'], 'delete') }}:
             tfaction: '-destroy'
 
-
       - template: ../steps/tf-apply.yml
         parameters:
           azServiceConnection: "${{ parameters.azServiceConnection }}"
           tfvars: "${{ parameters.tfvars }}"
           ${{ if eq(variables['Build.SourceBranchName'], 'delete') }}:
-          tfaction: '-destroy'
+            tfaction: '-destroy'
