@@ -10,7 +10,7 @@ parameters:
 
 steps:
   - task: TerraformTaskV4@4
-    displayName: Creates or update infrastructure (tf apply)
+    displayName: Creates or update or delete Terraform-managed infrastructure (tf apply ${{ parameters.tfaction }})
     inputs:
       provider: 'azurerm'
       command: 'apply'
