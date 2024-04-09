@@ -9,7 +9,7 @@ parameters:
 
 steps:
   - task: TerraformTaskV4@4
-    displayName: Plan changes required by the current terraform configuration (tf plan)
+    displayName: Plan changes required by the current terraform configuration (tf plan ${{ parameters.tfaction }})
     inputs:
       provider: 'azurerm'
       command: 'plan'
