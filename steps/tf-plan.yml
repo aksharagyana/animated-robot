@@ -3,7 +3,8 @@ parameters:
     type: string
   - name: azServiceConnection
     type: string
-
+  - name: tfaction
+    type: string
 
 steps:
   - task: TerraformTaskV4@4
@@ -11,10 +12,5 @@ steps:
     inputs:
       provider: 'azurerm'
       command: 'plan'
-      commandOptions: "${PLAN_FLAG} -var-file=${{ parameters.tfvars }}"
+      commandOptions: "${{ parameters.tfaction }} -var-file=${{ parameters.tfvars }}"
       environmentServiceNameAzureRM: "${{ parameters.azServiceConnection }}"
-    env:
-      ${{ if (eq(variables['Build.SourceBranch'], 'refs/heads/delete')) }}:
-        PLAN_FLAG: '-destroy'
-      ${{ else }}:
-        PLAN_FLAG: ''
