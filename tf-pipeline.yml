@@ -24,6 +24,7 @@ stages:
   - ${{each stage in parameters.envInstallList}}:
     - stage: ${{ replace(stage.env, '-', '_') }}_${{ replace(stage.workspace, '-', '_') }}_execute_terraform
       displayName: "${{ stage.env }} :: Execute terraform"
+      condition: always()
       jobs:
         - template: jobs/execute.yml
           parameters:
