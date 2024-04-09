@@ -21,8 +21,8 @@ parameters:
     type: string
 
 jobs:
-  - job: Plan
-    displayName: Plan changes required by the current terraform configuration
+  - job: Apply
+    displayName: Creates or update infrastructure
     pool:
       name: ubuntu-docker
     steps:

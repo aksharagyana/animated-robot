@@ -21,8 +21,8 @@ parameters:
     type: string
 
 jobs:
-  - job: Plan
-    displayName: Plan changes required by the current terraform configuration
+  - job: Destroy
+    displayName: Destroy Terraform-managed infrastructure
     pool:
       name: ubuntu-docker
     steps:
