@@ -38,27 +38,23 @@ jobs:
           tfenv: "${{ parameters.env }}"
           app: "${{ parameters.app }}"
 
-      - template: ../steps/tf-validate.yml
-        condition: |
-          or(
-            not(startsWith(variables['Build.SourceBranch'], 'refs/tags/')), 
-            eq(variables['Build.Reason'], 'PullRequest')
-          )
-        parameters:
-          azServiceConnection: "${{ parameters.azServiceConnection }}"
-          tfvars: "${{ parameters.tfvars }}"
+      - ${{ if or( not(startsWith(variables['Build.SourceBranch'], 'refs/tags/')), eq(variables['Build.Reason'], 'PullRequest')) }}:
+        - template: ../steps/tf-validate.yml
+          parameters:
+            azServiceConnection: "${{ parameters.azServiceConnection }}"
+            tfvars: "${{ parameters.tfvars }}"
 
       - template: ../steps/tf-plan.yml
         parameters:
           azServiceConnection: "${{ parameters.azServiceConnection }}"
           tfvars: "${{ parameters.tfvars }}"
-
-      - template: ../steps/tf-destroy.yml
-        condition: |
-            eq((variables['Build.SourceBranch'], 'refs/heads/delete'))
-        parameters:
-          azServiceConnection: "${{ parameters.azServiceConnection }}"
-          tfvars: "${{ parameters.tfvars }}"
+      - ${{ if eq((variables['Build.SourceBranch'], 'refs/heads/delete')) }}:
+        - template: ../steps/tf-destroy.yml
+  #        condition: |
+  #            eq((variables['Build.SourceBranch'], 'refs/heads/delete'))
+          parameters:
+            azServiceConnection: "${{ parameters.azServiceConnection }}"
+            tfvars: "${{ parameters.tfvars }}"
 
       - template: ../steps/tf-apply.yml
         parameters:
