@@ -15,9 +15,7 @@ parameters:
     type: string
   - name: tfStateName
     type: string
-  - name: env
-    type: string
-  - name: app
+  - name: tfworkspace
     type: string
 
 jobs:
@@ -35,8 +33,8 @@ jobs:
           tfStateAzSa: "${{ parameters.tfStateAzSa }}"
           tfStateAzSaCont: "${{ parameters.tfStateAzSaCont }}"
           tfStateName: "${{ parameters.tfStateName }}"
-          tfenv: "${{ parameters.env }}"
-          app: "${{ parameters.app }}"
+          tfworkspace: "${{ parameters.tfworkspace }}"
+
 
       - ${{ if or(startsWith(variables['Build.SourceBranch'], 'refs/tags/'), eq(variables['Build.Reason'], 'PullRequest')) }}:
         - template: ../steps/tf-validate.yml

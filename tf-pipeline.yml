@@ -18,24 +18,23 @@ parameters:
   - name: tfStateName
     type: string
     default: "terraform.tfstate"
-  - name: env
-    type: string
-  - name: app
-    type: string
+  - name: envInstallList
+    type: object
+
 
 stages:
-  - stage: execute_terraform
-    displayName: Execute terraform
-    jobs:
-      - template: jobs/execute.yml
-        parameters:
-          tfvars: "${{ parameters.tfvars }}"
-          tfModulePath: "${{ parameters.tfModulePath }}"
-          tfVersion: "${{ parameters.tfVersion }}"
-          azServiceConnection: "${{ parameters.azServiceConnection }}"
-          tfStateAzSaRG: "${{ parameters.tfStateAzSaRG }}"
-          tfStateAzSa: "${{ parameters.tfStateAzSa }}"
-          tfStateAzSaCont: "${{ parameters.tfStateAzSaCont }}"
-          tfStateName: "${{ parameters.tfStateName }}"
-          env: "${{ parameters.env }}"
-          app: "${{ parameters.app }}"
+  - ${{each stage in parameters.envInstallList}}:
+    - stage: ${{ stage }}_execute_terraform
+      displayName: Execute terraform
+      jobs:
+        - template: jobs/execute.yml
+          parameters:
+            tfvars: "${{ parameters.tfvars }}"
+            tfModulePath: "${{ parameters.tfModulePath }}"
+            tfVersion: "${{ parameters.tfVersion }}"
+            azServiceConnection: "${{ parameters.azServiceConnection }}"
+            tfStateAzSaRG: "${{ parameters.tfStateAzSaRG }}"
+            tfStateAzSa: "${{ parameters.tfStateAzSa }}"
+            tfStateAzSaCont: "${{ parameters.tfStateAzSaCont }}"
+            tfStateName: "${{ parameters.tfStateName }}"
+            tfworkspace: "${{ stage }}"

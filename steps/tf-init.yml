@@ -13,10 +13,9 @@ parameters:
     type: string
   - name: tfStateName
     type: string
-  - name: tfenv
+  - name: tfworkspace
     type: string
-  - name: app
-    type: string
+
 
 steps:
   - checkout: self
@@ -42,8 +41,8 @@ steps:
       backendAzureRmResourceGroupName: "${{ parameters.tfStateAzSaRG }}"
       backendAzureRmStorageAccountName: "${{ parameters.tfStateAzSa }}"
       backendAzureRmContainerName: "${{ parameters.tfStateAzSaCont }}"
-      backendAzureRmKey: "${{ parameters.tfenv }}-${{ parameters.app }}-${{ parameters.tfStateName }}"
+      backendAzureRmKey: "${{ parameters.tfworkspace }}-${{ parameters.tfStateName }}"
       workingDirectory: "${{ parameters.tfModulePath }}"
       reconfigureBackend: true
     env:
-      TF_WORKSPACE: "${{ parameters.tfenv }}${{ parameters.app }}"
+      TF_WORKSPACE: "${{ parameters.tfworkspace }}"
