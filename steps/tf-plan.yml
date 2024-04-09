@@ -11,5 +11,10 @@ steps:
     inputs:
       provider: 'azurerm'
       command: 'plan'
-      commandOptions: "-var-file=${{ parameters.tfvars }}"
+      commandOptions: "${PLAN_FLAG} -var-file=${{ parameters.tfvars }}"
       environmentServiceNameAzureRM: "${{ parameters.azServiceConnection }}"
+    env:
+      ${{ if (eq(variables['Build.SourceBranch'], 'refs/heads/delete')) }}:
+        PLAN_FLAG: '-destroy'
+      ${{ else }}:
+        PLAN_FLAG: ''
