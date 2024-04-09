@@ -38,7 +38,7 @@ jobs:
           tfenv: "${{ parameters.env }}"
           app: "${{ parameters.app }}"
 
-      - ${{ if or( not(startsWith(variables['Build.SourceBranch'], 'refs/tags/')), eq(variables['Build.Reason'], 'PullRequest')) }}:
+      - ${{ if or(startsWith(variables['Build.SourceBranch'], 'refs/tags/'), eq(variables['Build.Reason'], 'PullRequest')) }}:
         - template: ../steps/tf-validate.yml
           parameters:
             azServiceConnection: "${{ parameters.azServiceConnection }}"
