@@ -48,10 +48,11 @@ jobs:
         parameters:
           azServiceConnection: "${{ parameters.azServiceConnection }}"
           tfvars: "${{ parameters.tfvars }}"
+          tfaction:
           ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/delete') }}:
-            tfaction: '-destroy'
+            '-destroy'
           ${{ else }}:
-            tfaction: ''
+            ''
 
       - ${{ if eq(variables['Build.SourceBranch'], 'refs/heads/delete') }}:
         - template: ../steps/tf-destroy.yml
