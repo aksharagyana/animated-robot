@@ -24,12 +24,12 @@ parameters:
 
 stages:
   - ${{each stage in parameters.envInstallList}}:
-    - stage: ${{ replace(stage, '-', '_') }}_execute_terraform
+    - stage: ${{ replace(stage.workspace, '-', '_') }}_execute_terraform
       displayName: Execute terraform
       jobs:
         - template: jobs/execute.yml
           parameters:
-            tfvars: "${{ parameters.tfvars }}"
+            tfvars: "${{ stage.tfvars }}"
             tfModulePath: "${{ parameters.tfModulePath }}"
             tfVersion: "${{ parameters.tfVersion }}"
             azServiceConnection: "${{ parameters.azServiceConnection }}"
@@ -37,4 +37,4 @@ stages:
             tfStateAzSa: "${{ parameters.tfStateAzSa }}"
             tfStateAzSaCont: "${{ parameters.tfStateAzSaCont }}"
             tfStateName: "${{ parameters.tfStateName }}"
-            tfworkspace: "${{ stage }}"
+            tfworkspace: "${{ stage.workspace }}"
