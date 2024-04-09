@@ -1,6 +1,4 @@
 parameters:
-  - name: tfvars
-    type: string
   - name: tfModulePath
     type: string
     default: "."
