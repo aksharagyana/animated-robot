@@ -21,8 +21,8 @@ parameters:
     type: string
 
 jobs:
-  - job: Apply
-    displayName: Creates or update infrastructure
+  - job: apply
+    displayName: Manage infrastructure with terraform
     pool:
       name: ubuntu-docker
     steps:
@@ -38,7 +38,24 @@ jobs:
           tfenv: "${{ parameters.env }}"
           app: "${{ parameters.app }}"
 
+      - template: ../steps/tf-validate.yml
+        condition: |
+          or(
+            not(startsWith(variables['Build.SourceBranch'], 'refs/tags/')), 
+            eq(variables['Build.Reason'], 'PullRequest')
+          )
+        parameters:
+          azServiceConnection: "${{ parameters.azServiceConnection }}"
+          tfvars: "${{ parameters.tfvars }}"
+
       - template: ../steps/tf-plan.yml
+        parameters:
+          azServiceConnection: "${{ parameters.azServiceConnection }}"
+          tfvars: "${{ parameters.tfvars }}"
+
+      - template: ../steps/tf-destroy.yml
+        condition: |
+            eq((variables['Build.SourceBranch'], 'refs/heads/delete'))
         parameters:
           azServiceConnection: "${{ parameters.azServiceConnection }}"
           tfvars: "${{ parameters.tfvars }}"
